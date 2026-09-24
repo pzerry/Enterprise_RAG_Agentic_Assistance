@@ -1,0 +1,47 @@
+# Secrets and local environment configuration
+.env
+.env.*
+!.env.example
+.aws/
+*.pem
+*.key
+
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python caches and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Local documents and generated ingestion output
+/DATA/
+/processed_data/
+/.ingestion/
+
+# Local tool state and sessions
+/.deepeval/
+/.logfire/
+*.ses
+
+# Logs
+*.log
+logs/
+
+# Frontend dependencies and generated builds
+node_modules/
+/ui/dist/
+/ui/build/
+/ui/.next/
+
+# macOS and editor settings
+.DS_Store
+.idea/
+.vscode/
