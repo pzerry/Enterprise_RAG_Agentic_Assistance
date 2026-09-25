@@ -1,5 +1,9 @@
 # RAG document ingestion
 
+For the new terminal-based DeepEval component, application and regression suite,
+see [evals/deepeval_suite/README.md](evals/deepeval_suite/README.md).
+The existing RAGAS evaluation dashboard remains available.
+
 This project extracts text, splits it into bounded chunks, creates Gemini
 embeddings, and stores vectors in Qdrant. The current changes address oversized
 chunks, rate limits, duplicate records on reruns, and misleading success logs.

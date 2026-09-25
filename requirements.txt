@@ -48,7 +48,7 @@ langchain-nvidia-ai-endpoints # LangChain integration with NVIDIA AI Endpoints
 
 # --- EVALUATION (EVALS) ---
 ragas==0.4.3                # RAG-specific evaluation metrics (Faithfulness, Relevancy, Recall)
-deepeval                    # Pytest-compatible test runner wrapping RAGAS & safety metrics
+deepeval==4.2.3             # Independent component, RAG, quality and safety metrics
 langfuse                    # Live production monitoring, tracing & user feedback collection
 
 # --- EMBEDDINGS (SENTENCE TRANSFORMERS) ---

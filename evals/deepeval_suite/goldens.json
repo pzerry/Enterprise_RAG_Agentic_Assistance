@@ -1,0 +1,42 @@
+[
+  {
+    "id": "redis-start",
+    "input": "How do you start Redis for a Kubernetes work queue?",
+    "expected_output": "Apply redis-pod.yaml and redis-service.yaml using kubectl apply -f with the URLs https://k8s.io/examples/application/job/redis/redis-pod.yaml and https://k8s.io/examples/application/job/redis/redis-service.yaml.",
+    "gold_context": ["For this example, you will start a single instance of Redis.\n\nRun the following commands:\n\n    kubectl apply -f https://k8s.io/examples/application/job/redis/redis-pod.yaml\n    kubectl apply -f https://k8s.io/examples/application/job/redis/redis-service.yaml"],
+    "source": "DATA/true_data/parallel_work_queue.txt",
+    "review_status": "checked_against_local_source"
+  },
+  {
+    "id": "redis-queue",
+    "input": "How do you connect to Redis and add a task to the job2 work queue?",
+    "expected_output": "Connect with redis-cli -h redis, then use rpush job2 followed by a task value, for example rpush job2 \"apple\".",
+    "gold_context": ["Once the prompt appears, connect to Redis and fill the queue (named \"job2\"):\n\n    redis-cli -h redis\n\n    # Inside the redis prompt:\n    rpush job2 \"apple\"\n    rpush job2 \"banana\"\n    rpush job2 \"cherry\""],
+    "source": "DATA/true_data/parallel_work_queue.txt",
+    "review_status": "checked_against_local_source"
+  },
+  {
+    "id": "queue-worker",
+    "input": "Does each pod process only one item in the documented Kubernetes work queue example?",
+    "expected_output": "No. Each pod picks up an item, processes it, and repeats until the end of the queue is reached.",
+    "gold_context": ["In this example, as each pod is created, it picks up one unit of work\nfrom a task queue, processes it, and repeats until the end of the queue is reached."],
+    "source": "DATA/true_data/parallel_work_queue.txt",
+    "review_status": "checked_against_local_source"
+  },
+  {
+    "id": "metrics-commands",
+    "input": "Which kubectl commands confirm that the Metrics Server is collecting data?",
+    "expected_output": "Run kubectl top nodes and kubectl top pods --all-namespaces. They should show CPU and memory usage for nodes and pods.",
+    "gold_context": ["$ kubectl top nodes\n$ kubectl top pods --all-namespaces", "If the Metrics Server is properly installed and functioning, you should see CPU and memory usage metrics for nodes and pods in your cluster."],
+    "source": "DATA/true_data/pods_autoscale.html",
+    "review_status": "checked_against_local_source"
+  },
+  {
+    "id": "metrics-purpose",
+    "input": "Why is the Metrics Server needed before testing Kubernetes autoscaling?",
+    "expected_output": "It collects node and pod resource usage metrics needed for autoscaling decisions.",
+    "gold_context": ["The Metrics Server collects resource usage metrics from the cluster’s nodes and pods, which are necessary for autoscaling decisions."],
+    "source": "DATA/true_data/pods_autoscale.html",
+    "review_status": "checked_against_local_source"
+  }
+]

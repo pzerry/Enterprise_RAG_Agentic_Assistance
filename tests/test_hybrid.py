@@ -5,7 +5,7 @@ from types import SimpleNamespace
 from qdrant_client import QdrantClient, models
 from app.config import settings
 from app.services.retrieval import qdrant_service as q, ranking_service as r
-from app.agents.nodes import responder
+from app.agents.nodes import responder, retriever
 from evals import pipeline
 
 
@@ -46,6 +46,15 @@ class HybridTests(unittest.TestCase):
             self.assertEqual([d['point_id'] for d in result],['0','1'])
             self.assertEqual(result[0]['rerank_status'],'fallback')
             self.assertIsNone(result[0]['rerank_score'])
+
+    def test_retriever_uses_three_document_rerank_limit(self):
+        state={'current_query':'query','plan':[]}
+        docs=[{'content':f'chunk {i}','point_id':str(i),'source':f'doc-{i}.pdf','hybrid_score':0.5} for i in range(5)]
+        with patch.object(q,'search_enterprise_knowledge',return_value=docs), \
+             patch.object(r,'rerank_documents',return_value=docs[:3]) as rerank:
+            result=retriever.retrieve_node(state)
+        rerank.assert_called_once_with('query', docs, top_n=3)
+        self.assertEqual(len(result['documents']), 3)
 
     def test_generator_sources_match_prompt_and_clear_conversation(self):
         docs=[{'id':1,'source':'test.pdf','content':'Supported evidence'},

@@ -28,6 +28,7 @@ htmlcov/
 
 # Local tool state and sessions
 /.deepeval/
+/evals/deepeval_suite/reports/
 /.logfire/
 *.ses
 
