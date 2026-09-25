@@ -13,6 +13,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+      GROQ_API_KEY: ci-test-key
+
 jobs:
   checks:
     name: Python checks
@@ -45,3 +48,9 @@ jobs:
 
       - name: Run chunking tests
         run: python -m unittest discover -s tests -p 'test_chunking.py' -v
+
+      - name: Run ingestion tests
+        run: python -m unittest discover -s tests -p 'test_ingestion.py' -v
+
+      - name: Run retrieval tests
+        run: python -m unittest discover -s tests -p 'test_hybrid.py' -v

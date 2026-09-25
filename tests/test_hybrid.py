@@ -50,8 +50,8 @@ class HybridTests(unittest.TestCase):
     def test_retriever_uses_three_document_rerank_limit(self):
         state={'current_query':'query','plan':[]}
         docs=[{'content':f'chunk {i}','point_id':str(i),'source':f'doc-{i}.pdf','hybrid_score':0.5} for i in range(5)]
-        with patch.object(q,'search_enterprise_knowledge',return_value=docs), \
-             patch.object(r,'rerank_documents',return_value=docs[:3]) as rerank:
+        with patch.object(retriever,'search_enterprise_knowledge',return_value=docs), \
+             patch.object(retriever,'rerank_documents',return_value=docs[:3]) as rerank:
             result=retriever.retrieve_node(state)
         rerank.assert_called_once_with('query', docs, top_n=3)
         self.assertEqual(len(result['documents']), 3)
