@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-      GROQ_API_KEY: ci-test-key
+  GROQ_API_KEY: ci-test-key
 
 jobs:
   checks:
@@ -54,3 +54,9 @@ jobs:
 
       - name: Run retrieval tests
         run: python -m unittest discover -s tests -p 'test_hybrid.py' -v
+
+      - name: Run guardrail tests
+        run: python -m unittest discover -s tests -p 'test_guardrails.py' -v
+
+      - name: Run evaluation regression tests
+        run: python -m unittest discover -s tests -p 'test_evals.py' -v
