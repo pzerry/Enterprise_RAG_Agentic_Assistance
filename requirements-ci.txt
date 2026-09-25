@@ -9,3 +9,4 @@ beautifulsoup4==4.15.0
 FlashRank==0.2.10
 langchain-groq==1.1.3
 requests==2.34.2
+nemoguardrails==0.24.1
