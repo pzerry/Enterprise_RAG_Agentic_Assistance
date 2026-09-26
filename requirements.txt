@@ -41,18 +41,17 @@ pdfplumber                  # Fallback PDF parser for scanned/complex layouts
 langsmith                   # Specialized tracing for LangChain/LangGraph
 logfire[fastapi,requests]   # Pydantic Logfire — FastAPI + requests instrumentation
 loguru                      # Enhanced logging for Python
+importlib-metadata
 
 # --- GUARDRAILS ---
 nemoguardrails              # NVIDIA NeMo Guardrails for input/output safety rails
 langchain-nvidia-ai-endpoints # LangChain integration with NVIDIA AI Endpoints
 
 # --- EVALUATION (EVALS) ---
-ragas==0.4.3                # RAG-specific evaluation metrics (Faithfulness, Relevancy, Recall)
 deepeval==4.2.3             # Independent component, RAG, quality and safety metrics
 langfuse                    # Live production monitoring, tracing & user feedback collection
 
 # --- EMBEDDINGS (SENTENCE TRANSFORMERS) ---
-sentence-transformers       # Used by FlashRank reranker internally
 langchain_google_genai
 
 langchain-google-vertexai
@@ -63,3 +62,4 @@ fonttools
 
 # Local BM25 sparse vectors for hybrid Qdrant retrieval
 fastembed
+
