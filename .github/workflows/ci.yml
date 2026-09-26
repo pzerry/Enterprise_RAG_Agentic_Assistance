@@ -67,5 +67,6 @@ jobs:
       - name: Smoke test Docker image
         run: |
           docker run --rm \
+            -e GROQ_API_KEY="$GROQ_API_KEY" \
             production-grade-rag-app:ci \
             python -c "import main; print('Docker application import OK')"
