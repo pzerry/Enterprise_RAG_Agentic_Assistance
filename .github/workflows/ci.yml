@@ -64,15 +64,8 @@ jobs:
       - name: Build Docker image
         run: docker build -t production-grade-rag-app:ci .
 
-      Then CD takes over:
-CI passes
-   ↓
-Push Docker image to ECR
-   ↓
-AWS pulls image
-   ↓
-Run container- name: Smoke test Docker image
+      - name: Smoke test Docker image
         run: |
-            docker run --rm \
+          docker run --rm \
             production-grade-rag-app:ci \
             python -c "import main; print('Docker application import OK')"
