@@ -7,8 +7,13 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-logfire.configure(token=os.getenv("LOGFIRE_TOKEN"))
 
+logfire_token = os.getenv("LOGFIRE_TOKEN")
+
+if logfire_token:
+    logfire.configure(token=logfire_token)
+else:
+    logfire.configure(send_to_logfire=False)
 # Now safe to import app modules - logfire is already active
 from fastapi import FastAPI, Response
 from app.agents.graph import rag_agent
