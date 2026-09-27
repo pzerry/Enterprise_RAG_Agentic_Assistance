@@ -70,3 +70,29 @@ jobs:
             -e GROQ_API_KEY="$GROQ_API_KEY" \
             production-grade-rag-app:ci \
             python -c "import main; print('Docker application import OK')"
+
+  deploy:
+    name: AWS deployment
+    needs: checks
+
+    # Deploy only after a push/merge to main.
+    # Pull requests run CI but do not deploy.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Authenticate to AWS with GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          role-to-assume: arn:aws:iam::628088981748:role/production-rag-github-role
+          aws-region: us-east-1
+          allowed-account-ids: "628088981748"
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity
